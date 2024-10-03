@@ -5,10 +5,17 @@ import { User } from '@/models/User';
 import useSWR from 'swr';
 import { DataHookResponse } from './datahookResponse';
 
-export const useGetUsers = (): DataHookResponse<User[]> => {
+export interface GetUsersResponse {
+    users: Partial<User>[];
+    total: number;
+}
+
+export const useGetUsers = (
+    page: number
+): DataHookResponse<GetUsersResponse> => {
     const { data, mutate, error, isValidating, isLoading } = useSWR(
-        'users',
-        () => getUsers(),
+        ['users', page],
+        () => getUsers(page),
         {
             revalidateOnFocus: false,
             revalidateOnMount: true,
