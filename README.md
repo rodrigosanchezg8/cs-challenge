@@ -1,36 +1,41 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+Travel App runs with NextJS `14.2`
 
-## Getting Started
+## Running the app
 
-First, run the development server:
+Run the app using `npm run dev` and run specs using `npm run test`.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+## Features
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### Users table page
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+-   Contains a Table that shows the Picture, Activity (Traveller, Host), Country and Age of each User
+-   Clicking on a user redirects to their Profile Page.
+-   Implemented server-side pagination for efficient data loading.
+-   Utilizes SWR, which leverages from each request having an unique key in order to cache for responses upon new data retrieval.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+### User profile page
 
-## Learn More
+-   Displays the full detail of an User: interests, skills, email, about me, etc.
+-   Shows a list of user’s friends with clickable avatars, redirecting to their respective profiles.
 
-To learn more about Next.js, take a look at the following resources:
+## Used libraries
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+-   Ant Design is utilized for the layout, the users table, and text elements in the user profile.
+-   SWR to implement Cache Strategy.
+-   Jest for writing specs.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+### Challenges faced
 
-## Deploy on Vercel
+-   Cache Strategy. To ensure optimal performance, it’s essential to avoid reloading all data with every page visit. In order to accomplish this, I leveraged from the SWR library and its Cache Strategy.
+-   Router. I aligned with the best practices for the [newest app router](https://nextjs.org/docs/pages/building-your-application/upgrading/app-router-migration#step-6-migrating-data-fetching-methods) for both client and server rendering. Hence, user client-side files are located in (users/ and users/[id]), and server-side files are located in (api/users and api/users/[id]).
+-   Friends feature. A small issue, but to ensure there wasn't any problem with circular references, I excluded the friends property from the user's friends.
+-   Design. I went beyond a simple layout and leveraged Ant Design library to build a well polished design and offer a nicer user experience.
+-   Specs. A robust application must demonstrate stability, so I implemented unit tests to ensure fault tolerance.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## Specs
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Specs were added for asserting:
+
+-   Rendering users table page to verify the table displays users' data correctly.
+-   Redirecting from users table page to a user's profile.
+-   Rendering profile property page to check the user data is displayed correctly.
