@@ -1,26 +1,20 @@
-import { users } from '@/models/MockUsers';
 import { User } from '@/models/User';
 import { NextRequest, NextResponse } from 'next/server';
+import { getUserById } from '../service';
 
 interface ParamsProps {
     params: { id: string };
 }
 
 export async function GET(req: NextRequest, { params }: ParamsProps) {
-    const user: User | undefined = users.find((user) => user.id === params.id);
-    if (!user) {
-        throw new Error('User not found');
-    }
+    const user: User | null = getUserById(params.id);
 
-    user.friends = user.friendIds?.length
-        ? users
-              .filter((possibleFriend) =>
-                  user.friendIds?.includes(possibleFriend.id)
-              )
-              .map(({ friends, ...friendAttrs }) => {
-                  return friendAttrs;
-              })
-        : [];
+    if (!user) {
+        return NextResponse.json(
+            { message: 'User not found' },
+            { status: 404 }
+        );
+    }
 
     return NextResponse.json(user, { status: 200 });
 }

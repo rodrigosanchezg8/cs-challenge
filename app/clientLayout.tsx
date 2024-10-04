@@ -1,5 +1,5 @@
 'use client';
-
+import React from 'react';
 import './globals.css';
 import { Layout, Menu, MenuProps } from 'antd';
 import { Content, Footer, Header } from 'antd/es/layout/layout';

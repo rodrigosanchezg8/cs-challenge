@@ -1,40 +1,13 @@
-import { users } from '@/models/MockUsers';
-import { User } from '@/models/User';
+import { users } from '@/models/mock';
 import { NextRequest, NextResponse } from 'next/server';
-
-const DEFAULT_PAGE_SIZE = 10;
+import { getPagedUsers } from './service';
+import { User } from '@/models/User';
 
 export async function GET(req: NextRequest) {
     const { searchParams } = new URL(req.url);
-    const page = searchParams.get('page');
+    const page = searchParams.get('page') ?? 1;
 
-    const mappedUsers: Partial<User>[] = users.map(
-        ({
-            id,
-            nickname,
-            email,
-            picture_url,
-            activity,
-            country,
-            age,
-        }: Partial<User>) => ({
-            id,
-            nickname,
-            email,
-            picture_url,
-            activity,
-            country,
-            age,
-        })
-    );
-
-    const pageNumber = Number(page);
-    const pageLimit = DEFAULT_PAGE_SIZE;
-
-    const startIndex = (pageNumber - 1) * pageLimit;
-    const endIndex = pageNumber * pageLimit;
-
-    const usersInPage = mappedUsers.slice(startIndex, endIndex);
+    const usersInPage: Partial<User>[] = await getPagedUsers(Number(page));
 
     return NextResponse.json({
         users: usersInPage,

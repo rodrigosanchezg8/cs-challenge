@@ -1,9 +1,9 @@
 'use client';
 
-import { getUsers } from '@/app/requests/getUsers';
 import { User } from '@/models/User';
 import useSWR from 'swr';
 import { DataHookResponse } from './datahookResponse';
+import { getUsers } from '@/requests/getUsers';
 
 export interface GetUsersResponse {
     users: Partial<User>[];

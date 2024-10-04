@@ -5,7 +5,7 @@ export const users: User[] = [
         id: '1',
         firstName: 'John',
         lastName: 'Doe',
-        country: 'United States',
+        country: 'USA',
         picture_url: 'https://randomuser.me/api/portraits/men/1.jpg',
         age: 32,
         aboutMe:
@@ -197,7 +197,7 @@ export const users: User[] = [
         email: 'lucas.moore@example.com',
         nickname: 'Luke',
         activity: 'Host',
-        friendIds: ['11', '15', '19', '22'],
+        friendIds: [],
     },
     {
         id: '14',

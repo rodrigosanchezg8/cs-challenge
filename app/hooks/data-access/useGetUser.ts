@@ -3,7 +3,7 @@
 import { User } from '@/models/User';
 import useSWR from 'swr';
 import { DataHookResponse } from './datahookResponse';
-import { getUser } from '@/app/requests/getUser';
+import { getUser } from '@/requests/getUser';
 
 export const useGetUser = (id: string): DataHookResponse<User> => {
     const { data, mutate, error, isValidating, isLoading } = useSWR(

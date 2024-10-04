@@ -1,6 +1,6 @@
 'use client';
 
-import { useGetUser } from '@/app/hooks/data-access/useGetUser';
+import React from 'react';
 import { Alert, Avatar, Button, Skeleton, Typography } from 'antd';
 import {
     UserOutlined,
@@ -16,12 +16,9 @@ import { useParams, useRouter } from 'next/navigation';
 import { CSSProperties } from 'react';
 import { profilePageStyle } from './styles';
 import { User } from '@/models/User';
+import { useGetUser } from '@/hooks/data-access/useGetUser';
 
 const { Text, Title } = Typography;
-
-interface UserProfileProps {
-    user: User;
-}
 
 export default function UserProfile() {
     const params = useParams();

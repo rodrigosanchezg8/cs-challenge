@@ -1,5 +1,6 @@
 'use client';
 
+import React from 'react';
 import { Alert, Avatar, Skeleton, Spin, Table, Typography } from 'antd';
 
 import { useRouter } from 'next/navigation';
